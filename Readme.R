@@ -1,5 +1,8 @@
+library(readxl)
+ggdotchart <- as.data.frame(read_excel("ggdotchart.xlsx"))
 ## lollipop_chart
 library(ggplot2)
+library(ggcharts)
 diverging_lollipop_chart(
     data = ggdotchart, x = Country, y = Wheat,                              
     lollipop_colors = c("darkgreen", "darkred"),
