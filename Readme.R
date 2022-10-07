@@ -14,12 +14,14 @@ diverging_lollipop_chart(
 
 ggdotchart$Country <- factor(ggdotchart$Country, levels = ggdotchart$Country)
 
+colourbysign <- ifelse(ggdotchart$Wheat > 0, "darkgreen", "darkred")
+
 wheat.loll <- ggplot(data = ggdotchart, aes(x=Country, y=Wheat)) +
-    geom_segment( aes(xend=Country, yend=0), color=ifelse(ggdotchart$Wheat > 0, "darkgreen", "darkred")) +
-    geom_point( size=3, color=ifelse(ggdotchart$Wheat > 0, "darkgreen", "darkred")) +
+    geom_segment( aes(xend=Country, yend=0), colour= colourbysign) +
+    geom_point( size=3, colour = colourbysign) +
     coord_flip() +
     theme_bw() +
-    xlab("")
+    theme(axis.text.y = element_text(colour = colourbysign))
 
 
 maize <- as.data.frame(read_excel("ggdotchart.xlsx", sheet = 2))
@@ -38,7 +40,8 @@ maize.loll <- ggplot(data = maize, aes(x=Country, y=Maize)) +
     geom_segment( aes(xend=Country, yend=0), color="darkred") +
     geom_point( size=3, color="darkred") +
     coord_flip() +
-    theme_bw()
+    theme_bw() +
+    theme(axis.text.y = element_text(colour = "darkred"))
 
 pdf()
 wheat.loll
