@@ -16,7 +16,7 @@ ggdotchart$Country <- factor(ggdotchart$Country, levels = ggdotchart$Country)
 
 wheat.loll <- ggplot(data = ggdotchart, aes(x=Country, y=Wheat)) +
     geom_segment( aes(xend=Country, yend=0)) +
-    geom_point( size=3, color="orange") +
+    geom_point( size=3, color=ifelse(ggdotchart$Wheat > 0, "darkgreen", "darkred")) +
     coord_flip() +
     theme_bw() +
     xlab("")
