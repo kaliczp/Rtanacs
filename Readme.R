@@ -14,7 +14,7 @@ diverging_lollipop_chart(
 
 ggdotchart$Country <- factor(ggdotchart$Country, levels = ggdotchart$Country)
 
-ggplot(data = ggdotchart, aes(x=Country, y=Wheat)) +
+wheat.loll <- ggplot(data = ggdotchart, aes(x=Country, y=Wheat)) +
     geom_segment( aes(xend=Country, yend=0)) +
     geom_point( size=3, color="orange") +
     coord_flip() +
@@ -34,25 +34,13 @@ diverging_lollipop_chart(
 
 maize$Country <- factor(maize$Country, levels = maize$Country)
 
-ggplot(data = maize, aes(x=Country, y=Maize)) +
+maize.loll <- ggplot(data = maize, aes(x=Country, y=Maize)) +
     geom_segment( aes(xend=Country, yend=0)) +
-    geom_point( size=3, color="orange") +
+    geom_point( size=3, color="darkred") +
     coord_flip() +
-    theme_bw() +
-    xlab("")
+    theme_bw()
 
 pdf()
-par(mfrow = c(1,2))
-ggplot(data = ggdotchart, aes(x=Country, y=Wheat)) +
-    geom_segment( aes(xend=Country, yend=0)) +
-    geom_point( size=3, color="orange") +
-    coord_flip() +
-    theme_bw() +
-    xlab("")
-ggplot(data = maize, aes(x=Country, y=Maize)) +
-    geom_segment( aes(xend=Country, yend=0)) +
-    geom_point( size=3, color="orange") +
-    coord_flip() +
-    theme_bw() +
-    xlab("")
+wheat.loll
+maize.loll
 dev.off()
