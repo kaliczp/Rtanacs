@@ -16,8 +16,9 @@ SimpleLolly <- function(x, variable){
         geom_segment( aes(xend=Country, yend=0), colour= colourbysign) +
         geom_point( size=3, colour = colourbysign) +
         coord_flip() +
-        theme_bw() +
-        theme(axis.text.y = element_text(colour = colourbysign))
+        theme_classic() +
+        theme(axis.text.y = element_text(colour = colourbysign),
+              panel.border = element_blank())
 
     out.loll
 }
