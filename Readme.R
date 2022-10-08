@@ -15,7 +15,8 @@ SimpleLolly <- function(x, variable){
     out.loll <- ggplot(data = x, aes(x=.data[[variable]], y=Country)) +
         geom_segment( aes(yend=Country, xend=0), colour= colourbysign) +
         geom_vline(xintercept=0, colour = "darkgrey") +
-        geom_point(size=3, colour = colourbysign) +
+        geom_point(size=8.5, colour = colourbysign) +
+        geom_text(aes(label = round(.data[[variable]])), colour = "white") +
         theme_classic() +
         labs(y = NULL) +
         guides(y = "none") +
