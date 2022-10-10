@@ -50,7 +50,7 @@ SimpleLolly <- function(x, variable){
 wheat.loll <- SimpleLolly(corn, variable = "Wheat")
 maize.loll <- SimpleLolly(corn, variable = "Maize")
 
-pdf()
+pdf(width = 10 / 2.54)
 wheat.loll
 maize.loll
 dev.off()
