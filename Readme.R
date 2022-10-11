@@ -47,10 +47,16 @@ SimpleLolly <- function(x, variable){
     out.loll
 }
 
-wheat.loll <- SimpleLolly(corn, variable = "Wheat")
-maize.loll <- SimpleLolly(corn, variable = "Maize")
+Wheat.loll <- SimpleLolly(corn, variable = "Wheat")
+Maize.loll <- SimpleLolly(corn, variable = "Maize")
+Barley.loll <- SimpleLolly(corn, variable = "Barley")
+Rye.loll <- SimpleLolly(corn, variable = "Rye")
+Oats.loll <- SimpleLolly(corn, variable = "Oats")
+Rapeseed.loll <- SimpleLolly(corn, variable = "Rapeseed")
+Sunflower.loll <- SimpleLolly(corn, variable = "Sunflower")
 
-pdf(width = 10 / 2.54)
-wheat.loll
-maize.loll
-dev.off()
+for(tti in 2:ncol(corn)){
+    pdf(paste0(names(corn)[tti], ".pdf"), width = 10 / 2.54)
+    get(paste0(names(corn)[tti], ".loll"))
+    dev.off()
+ }
