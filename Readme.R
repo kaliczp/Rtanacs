@@ -4,7 +4,7 @@ library(ggplot2)
 
 SimpleLolly <- function(x, variable){
     ## Delete NA rows in varialble
-    x <- x[!is.na(x[, variable]),]
+    # x <- x[!is.na(x[, variable]),]
     ## Order variables
     x <- x[order(x[, variable]), ]
     ## Labels in the right order
@@ -55,8 +55,7 @@ Oats.loll <- SimpleLolly(corn, variable = "Oats")
 Rapeseed.loll <- SimpleLolly(corn, variable = "Rapeseed")
 Sunflower.loll <- SimpleLolly(corn, variable = "Sunflower")
 
-for(tti in 2:ncol(corn)){
-    pdf(paste0(names(corn)[tti], ".pdf"), width = 10 / 2.54)
-    get(paste0(names(corn)[tti], ".loll"))
-    dev.off()
- }
+tti <- 2 # Replace with column number
+pdf(paste0(names(corn)[tti], ".pdf"), width = 10 / 2.54)
+get(paste0(names(corn)[tti], ".loll"))
+dev.off()
