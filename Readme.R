@@ -56,6 +56,6 @@ Rapeseed.loll <- SimpleLolly(corn, variable = "Rapeseed")
 Sunflower.loll <- SimpleLolly(corn, variable = "Sunflower")
 
 tti <- 2 # Replace with column number
-pdf(paste0(names(corn)[tti], ".pdf"), width = 10 / 2.54)
+pdf(paste0("GgdotchartBuborékban", tti, ".pdf"), width = 10 / 2.54)
 get(paste0(names(corn)[tti], ".loll"))
 dev.off()
