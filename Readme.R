@@ -6,6 +6,17 @@ corn$Country <- factor(corn$Country,
                                      "Country"]
                        )
 
+tti <- 2
+corn.col <- corn[, c(1,tti)]
+corn.col$Corn <- colnames(corn)[tti]
+colnames(corn.col) <- c("Country", "Perc", "Corn")
+for(tti in 3:ncol(corn)) {
+    ttcorn <- corn[, c(1, tti)]
+    ttcorn$Corn <- colnames(corn)[tti]
+    colnames(ttcorn) <- c("Country", "Perc", "Corn")
+    corn.col <- rbind(corn.col, ttcorn)
+}
+
 library(ggplot2)
 
 SimpleLolly <- function(x, variable){
@@ -16,19 +27,15 @@ SimpleLolly <- function(x, variable){
         geom_vline(xintercept=0, colour = "darkgrey") +
         geom_point(size=8.5, colour = colourbysign) +
         geom_text(aes(label = round(.data[[variable]])), colour = "white") +
+        facet_wrap(~Corn) +
         theme_classic() +
-        labs(y = NULL)
+        labs(x = NULL, y = NULL) +
+        coord_cartesian(clip = "off")
     out.loll
 }
 
-Wheat.loll <- SimpleLolly(corn, variable = "Wheat")
-Maize.loll <- SimpleLolly(corn, variable = "Maize")
-Barley.loll <- SimpleLolly(corn, variable = "Barley")
-Rye.loll <- SimpleLolly(corn, variable = "Rye")
-Rapeseed.loll <- SimpleLolly(corn, variable = "Rapeseed")
-Sunflower.loll <- SimpleLolly(corn, variable = "Sunflower")
+SimpleLolly(corn.col, "Perc")
 
-tti <- 2 # Replace with column number
-pdf(paste0("GgdotchartBuborékban", tti, ".pdf"), width = 10 / 2.54)
-get(paste0(names(corn)[tti], ".loll"))
+pdf(paste0("GgdotchartBuborékban.pdf"), height = 27 / 2.54, width = 18 / 2.54)
+SimpleLolly(corn.col, "Perc")
 dev.off()
