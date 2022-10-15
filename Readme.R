@@ -16,6 +16,10 @@ for(tti in 3:ncol(corn)) {
     colnames(ttcorn) <- c("Country", "Perc", "Corn")
     corn.col <- rbind(corn.col, ttcorn)
 }
+corn.col$Corn <- factor(corn.col$Corn,
+                       levels = colnames(corn[, -1]),
+                       )
+
 
 library(ggplot2)
 
