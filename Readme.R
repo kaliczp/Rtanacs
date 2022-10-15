@@ -1,5 +1,6 @@
 library(readxl)
 corn <- as.data.frame(read_excel("ggdotchartall.xlsx"))
+corn <- corn[,-6]
 library(ggplot2)
 
 SimpleLolly <- function(x, variable){
@@ -51,7 +52,6 @@ Wheat.loll <- SimpleLolly(corn, variable = "Wheat")
 Maize.loll <- SimpleLolly(corn, variable = "Maize")
 Barley.loll <- SimpleLolly(corn, variable = "Barley")
 Rye.loll <- SimpleLolly(corn, variable = "Rye")
-Oats.loll <- SimpleLolly(corn, variable = "Oats")
 Rapeseed.loll <- SimpleLolly(corn, variable = "Rapeseed")
 Sunflower.loll <- SimpleLolly(corn, variable = "Sunflower")
 
