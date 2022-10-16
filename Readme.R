@@ -1,8 +1,7 @@
 library(readxl)
 corn <- as.data.frame(read_excel("ggdotchartall.xlsx"))
-corn <- corn[,-6]
 corn$Country <- factor(corn$Country,
-                       levels = corn[order(as.vector(corn$Country), decreasing = TRUE),
+                       levels = corn[order(corn$Country, decreasing = TRUE),
                                      "Country"]
                        )
 
