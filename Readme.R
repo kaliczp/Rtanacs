@@ -25,11 +25,12 @@ library(ggplot2)
 SimpleLolly <- function(x, variable){
     ## Colour by sing
     colourbysign <- ifelse(x[, variable] > 0, "darkgreen", "darkred")
+    cornlabel <- round(x[, variable])
     out.loll <- ggplot(data = x, aes(x=.data[[variable]], y=Country)) +
         geom_segment( aes(yend=Country, xend=0), colour= colourbysign) +
         geom_vline(xintercept=0, colour = "darkgrey") +
-        geom_point(size=8.5, colour = colourbysign) +
-        geom_text(aes(label = round(.data[[variable]])), colour = "white") +
+        geom_point(size=6.5, colour = colourbysign) +
+        geom_text(aes(label = cornlabel), colour = "white", size = 2.5) +
         facet_wrap(~Corn) +
         theme_classic() +
         labs(x = NULL, y = NULL) +
