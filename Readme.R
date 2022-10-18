@@ -1,9 +1,7 @@
 library(readxl)
-corn <- as.data.frame(read_excel("ggdotchartall.xlsx"))
-corn$Country <- factor(corn$Country,
-                       levels = corn[order(corn$Country, decreasing = TRUE),
-                                     "Country"]
-                       )
+ttsheet <- 2
+corn <- as.data.frame(read_excel("ggdotchartall.xlsx", ttsheet))
+corn[,1] <- factor(corn[,1], levels = corn[order(corn[,1], decreasing = TRUE), 1])
 
 tti <- 2
 corn.col <- corn[, c(1,tti)]
