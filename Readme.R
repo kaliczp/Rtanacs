@@ -20,7 +20,7 @@ corn.col$Corn <- factor(corn.col$Corn,
 
 library(ggplot2)
 
-SimpleLolly <- function(x, variable, bw = FALSE, lolly = TRUE){
+SimpleLolly <- function(x, variable, bw = FALSE, lolly = TRUE, abs = FALSE){
     if(bw) {
         ## Grey by sing
         colourbysign <- ifelse(x[, variable] > 0, "grey50", "grey70")
@@ -31,12 +31,19 @@ SimpleLolly <- function(x, variable, bw = FALSE, lolly = TRUE){
         fontcolour <- "white"
     }
     cornlabel <- round(x[, variable])
+    if(abs)
+        cornlabel <- abs(cornlabel)
     out.nololly <- ggplot(data = x, aes(x=.data[[variable]], y=Country)) +
         geom_segment( aes(yend=Country, xend=0), colour= colourbysign) +
         geom_vline(xintercept=0, colour = "darkgrey")
     if(lolly) {
-        out.notext <- out.nololly +
-            geom_point(size=7, colour = colourbysign)
+        if(abs) {
+            out.notext <- out.nololly +
+                geom_point(size=7, colour = colourbysign)
+        } else {
+            out.notext <- out.nololly +
+                geom_point(size=5, colour = colourbysign)
+        }
     } else {
         out.notext <- out.nololly
     }
