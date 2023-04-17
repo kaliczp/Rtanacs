@@ -29,6 +29,7 @@ corn.col$CCCode <- factor(corn.col$CCCode, levels = corn.col[order(corn.col$Perc
 
 
 ReorderedLolly <- function(x, variable, na.rm = FALSE, yaxis = TRUE) {
+    require(ggplot2)
     if(na.rm)
         x <- x[!is.na(x[, variable]),]
     colourbysign <- ifelse(x[, variable] > 0, "darkgreen", "darkred")
