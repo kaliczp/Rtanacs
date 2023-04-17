@@ -1,7 +1,13 @@
 library(readxl)
-ttsheet <- 1 # 1 angol, 2 magyar
+ttsheet <- 2 # 1 English, 2 Hungarian
 corn <- as.data.frame(read_excel("ggdotchartall.xlsx", ttsheet))
 corn[,1] <- factor(corn[,1], levels = corn[order(corn[,1], decreasing = TRUE), 1])
+if(ttsheet == 2) {
+    corn$Ország <- gsub("ország", "o.", corn$Ország)
+    corn$Ország <- gsub("Íro.", "Írország", corn$Ország)
+    corn$Ország <- gsub("Letto.", "Lettország", corn$Ország)
+    corn$Ország <- gsub("Észto.", "Észtország", corn$Ország)
+}
 
 ## Collect all columns into one value column data.frame for ggplot
 tti <- 2
@@ -60,7 +66,7 @@ ReorderedLolly(corn.col, "Perc", yaxis = FALSE)
 dev.off()
 
 
-pdf(paste0("GgdotchartBuborékban_rank6HU.pdf"), height = 22.5 / 2.54, width = 24.5 / 2.54, pointsize = 5)
+pdf(paste0("GgdotchartBuborékban_rank6HU.pdf"), height = 22.5 / 2.54, width = 18 / 2.54, pointsize = 5)
 par(oma=c(0,0,0,2))
 ReorderedLolly(corn.col, "Perc", yaxis = FALSE)
 dev.off()
