@@ -28,7 +28,7 @@ corn.col$CCCode <- paste(corn.col$Country, corn.col$Corn, sep = "__")
 corn.col$CCCode <- factor(corn.col$CCCode, levels = corn.col[order(corn.col$Perc), "CCCode"])
 
 
-ReorderedLolly <- function(x, variable, na.rm = FALSE, yaxis = TRUE,
+ReorderedLolly <- function(x, variable, na.rm = FALSE, yaxis = TRUE, xlim = NULL,
                            col = c("darkgreen", "darkred"), shape = "circle",
                            lab.dist.default = 1, close.lab.threshold = 3.5, colse.lab.factor = 8/7) {
     require(ggplot2)
@@ -64,6 +64,9 @@ ReorderedLolly <- function(x, variable, na.rm = FALSE, yaxis = TRUE,
                                data = neg.lab,
                                colour = col[2]) +
             guides(y = "none")
+    }
+    if(!is.null(xlim)) {
+        out <- out + scale_x_continuous(limits = xlim)
     }
     out
 }
