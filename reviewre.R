@@ -10,5 +10,6 @@ eur.df$CCCode <- factor(eur.df$CCCode, levels = eur.df[nrow(eur.df):1, "CCCode"]
 
 pdf("GgdotchartEUR.pdf", height = 11.25 / 2.54, width = 6 / 2.54, pointsize = 5)
 ReorderedLolly(eur.df, "Income", yaxis = FALSE,
+               shape = "rectangle",
                close.lab.threshold = 220, colse.lab.factor = 1.05)
 dev.off()

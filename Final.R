@@ -29,7 +29,7 @@ corn.col$CCCode <- factor(corn.col$CCCode, levels = corn.col[order(corn.col$Perc
 
 
 ReorderedLolly <- function(x, variable, na.rm = FALSE, yaxis = TRUE,
-                           col = c("darkgreen", "darkred"),
+                           col = c("darkgreen", "darkred"), shape = "circle",
                            close.lab.threshold = 3.5, colse.lab.factor = 8/7) {
     require(ggplot2)
     if(na.rm)
@@ -39,9 +39,13 @@ ReorderedLolly <- function(x, variable, na.rm = FALSE, yaxis = TRUE,
     cornlabel <- round(x[, variable])
     out <- ggplot(data = x, aes(x=.data[[variable]], y=CCCode)) +
         geom_segment( aes(yend=CCCode, xend=0), colour= colourbysign) +
-        geom_vline(xintercept=0, colour = "darkgrey") +
-        geom_point(size=6.5, colour = colourbysign) +
-        facet_wrap(~Corn, scales = "free_y") +
+        geom_vline(xintercept=0, colour = "darkgrey")
+    if(shape == "circle") {
+        out <- out + geom_point(size=6.5, colour = colourbysign)
+    } else {
+        out <- out + geom_label(aes(label = cornlabel), colour = colourbysign, size = 2.9, fill = colourbysign)
+    }
+    out  <- out + facet_wrap(~Corn, scales = "free_y") +
         theme_classic() +
         labs(x = NULL, y = NULL) +
         coord_cartesian(clip = "off") +
