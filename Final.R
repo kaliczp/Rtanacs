@@ -28,11 +28,11 @@ corn.col$CCCode <- paste(corn.col$Country, corn.col$Corn, sep = "__")
 corn.col$CCCode <- factor(corn.col$CCCode, levels = corn.col[order(corn.col$Perc), "CCCode"])
 
 
-ReorderedLolly <- function(x, variable, na.rm = FALSE, yaxis = TRUE) {
+ReorderedLolly <- function(x, variable, na.rm = FALSE, yaxis = TRUE, col = c("darkgreen", "darkred")) {
     require(ggplot2)
     if(na.rm)
         x <- x[!is.na(x[, variable]),]
-    colourbysign <- ifelse(x[, variable] > 0, "darkgreen", "darkred")
+    colourbysign <- ifelse(x[, variable] > 0, col[1], col[2])
     fontcolour <- "white"
     cornlabel <- round(x[, variable])
     out <- ggplot(data = x, aes(x=.data[[variable]], y=CCCode)) +
@@ -51,12 +51,12 @@ ReorderedLolly <- function(x, variable, na.rm = FALSE, yaxis = TRUE) {
         pos.lab$xpos <- ifelse(pos.lab[, variable] < 3.5, -4, -1)
         out <- out + geom_text(aes(x = xpos, label = Country, hjust = "right"),
                                data = pos.lab,
-                               colour = "darkgreen")
+                               colour = col[1])
         neg.lab <- subset(x, get(variable) < 0)
         neg.lab$xpos <- ifelse(neg.lab[, variable] > -3.5, 4, 1)
         out <- out + geom_text(aes(x = xpos, label = Country, hjust = "left"),
                                data = neg.lab,
-                               colour = "darkred") +
+                               colour = col[2]) +
             guides(y = "none")
     }
     out
