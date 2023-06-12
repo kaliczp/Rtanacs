@@ -28,7 +28,9 @@ corn.col$CCCode <- paste(corn.col$Country, corn.col$Corn, sep = "__")
 corn.col$CCCode <- factor(corn.col$CCCode, levels = corn.col[order(corn.col$Perc), "CCCode"])
 
 
-ReorderedLolly <- function(x, variable, na.rm = FALSE, yaxis = TRUE, col = c("darkgreen", "darkred")) {
+ReorderedLolly <- function(x, variable, na.rm = FALSE, yaxis = TRUE,
+                           col = c("darkgreen", "darkred"),
+                           close.lab.threshold = 3.5, colse.lab.factor = 8/7) {
     require(ggplot2)
     if(na.rm)
         x <- x[!is.na(x[, variable]),]
@@ -48,12 +50,12 @@ ReorderedLolly <- function(x, variable, na.rm = FALSE, yaxis = TRUE, col = c("da
         out <- out + scale_y_discrete(labels = function(x) gsub("__.+$", "", x))
     } else {
         pos.lab <- subset(x, get(variable) >= 0)
-        pos.lab$xpos <- ifelse(pos.lab[, variable] < 3.5, -4, -1)
+        pos.lab$xpos <- ifelse(pos.lab[, variable] < close.lab.threshold, -colse.lab.factor * close.lab.threshold, -1)
         out <- out + geom_text(aes(x = xpos, label = Country, hjust = "right"),
                                data = pos.lab,
                                colour = col[1])
         neg.lab <- subset(x, get(variable) < 0)
-        neg.lab$xpos <- ifelse(neg.lab[, variable] > -3.5, 4, 1)
+        neg.lab$xpos <- ifelse(neg.lab[, variable] > -close.lab.threshold, colse.lab.factor * close.lab.threshold, 1)
         out <- out + geom_text(aes(x = xpos, label = Country, hjust = "left"),
                                data = neg.lab,
                                colour = col[2]) +

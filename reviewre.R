@@ -8,4 +8,7 @@ eur.df <- data.frame(Country = eur.raw[,1, drop = TRUE],
 eur.df$CCCode <- paste0(eur.df$Country, "__EUR")
 eur.df$CCCode <- factor(eur.df$CCCode, levels = eur.df[nrow(eur.df):1, "CCCode"])
 
-ReorderedLolly(eur.df, "Income", yaxis = FALSE)
+pdf("GgdotchartEUR.pdf", height = 11.25 / 2.54, width = 6 / 2.54, pointsize = 5)
+ReorderedLolly(eur.df, "Income", yaxis = FALSE,
+               close.lab.threshold = 220, colse.lab.factor = 1.05)
+dev.off()
