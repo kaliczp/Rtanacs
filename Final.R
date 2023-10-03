@@ -81,6 +81,11 @@ par(oma=c(0,0,0,2))
 ReorderedLolly(corn.col, "Perc", yaxis = FALSE)
 dev.off()
 
+pdf(paste0("GgdotchartBuborékban_rank6HUff.pdf"), height = 22.5 / 2.54, width = 18 / 2.54, pointsize = 5)
+par(oma=c(0,0,0,2))
+ReorderedLolly(corn.col, "Perc", yaxis = FALSE, col = c("darkgray", "black"))
+dev.off()
+
 ## Rectangle
 pdf(paste0("GgdotchartRect_rank6.pdf"), height = 22.5 / 2.54, width = 18 / 2.54, pointsize = 5)
 ReorderedLolly(corn.col, "Perc", yaxis = FALSE, shape = "rectangle")
@@ -89,4 +94,9 @@ dev.off()
 pdf(paste0("GgdotchartRect_rank6HU.pdf"), height = 22.5 / 2.54, width = 18 / 2.54, pointsize = 5)
 par(oma=c(0,0,0,2))
 ReorderedLolly(corn.col, "Perc", yaxis = FALSE, shape = "rectangle")
+dev.off()
+
+pdf(paste0("GgdotchartRect_rank6HUff.pdf"), height = 22.5 / 2.54, width = 18 / 2.54, pointsize = 5)
+par(oma=c(0,0,0,2))
+ReorderedLolly(corn.col, "Perc", yaxis = FALSE, shape = "rectangle", col = c("darkgray", "black"))
 dev.off()
