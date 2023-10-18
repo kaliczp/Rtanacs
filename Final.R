@@ -1,12 +1,14 @@
 library(readxl)
 ttsheet <- 2 # 1 English, 2 Hungarian
 corn <- as.data.frame(read_excel("ggdotchartall.xlsx", ttsheet))
+## Actualised stats
+corn <- as.data.frame(read_excel("fig_2.xlsx"))
 corn[,1] <- factor(corn[,1], levels = corn[order(corn[,1], decreasing = TRUE), 1])
 if(ttsheet == 2) {
     corn$Ország <- gsub("ország", "o.", corn$Ország)
     corn$Ország <- gsub("Íro.", "Írország", corn$Ország)
-    corn$Ország <- gsub("Letto.", "Lettország", corn$Ország)
-    corn$Ország <- gsub("Észto.", "Észtország", corn$Ország)
+#    corn$Ország <- gsub("Letto.", "Lettország", corn$Ország)
+#    corn$Ország <- gsub("Észto.", "Észtország", corn$Ország)
 }
 
 ## Collect all columns into one value column data.frame for ggplot
