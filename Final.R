@@ -1,6 +1,6 @@
 library(readxl)
-ttsheet <- 2 # 2 English, 1 Hungarian
-corn <- as.data.frame(read_excel("fig_2_angol_magyar.xlsx", sheet = 2))
+ttsheet <- 1 # 2 English, 1 Hungarian
+corn <- as.data.frame(read_excel("fig_2_angol_magyar.xlsx", sheet = ttsheet))
 corn[,1] <- factor(corn[,1], levels = corn[order(corn[,1], decreasing = TRUE), 1])
 if(ttsheet == 1) {
     corn$Ország <- gsub("ország", "o.", corn$Ország)

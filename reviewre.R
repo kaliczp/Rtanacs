@@ -1,8 +1,9 @@
 library(readxl)
-ttsheet  <- 2 # 1 English, 2 Hungarian, 3 NewHun
+ttsheet  <- 1 # 1 English, 2 Hungarian, 3 NewHun
+eur.raw <- read_excel("fig_3_angol_magyar.xlsx", sheet = ttsheet)
 
 names(eur.raw) <- c("Ország", "Million EUR")
-if(ttsheet == 3) {
+if(ttsheet == 1) {
     eur.raw$Ország <- gsub("ország", "o.", eur.raw$Ország)
     eur.raw$Ország <- gsub("Íro.", "Írország", eur.raw$Ország)
     eur.raw$Ország <- gsub("Lengyelo.", "Lengyelország", eur.raw$Ország)
@@ -13,7 +14,7 @@ if(ttsheet == 3) {
 
 eur.df <- data.frame(Country = eur.raw[,1, drop = TRUE],
                      Income = eur.raw[,2, drop = TRUE],
-                     Corn = "Million EUR"
+                     Corn = "Millió EUR"
                      )
 eur.df$CCCode <- paste0(eur.df$Country, "__EUR")
 eur.df$CCCode <- factor(eur.df$CCCode, levels = eur.df[nrow(eur.df):1, "CCCode"])
